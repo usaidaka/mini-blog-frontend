@@ -4,12 +4,47 @@ import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 
 import Navbar from "./Navbar";
+import { useState } from "react";
+import axios from "../API/axios";
+
+/* VARIABLE STORE */
+/* pwRgx untuk sesuai requirement (?=.*[-_+=!@#$%^&*]) karena udah terlanjur daftar pakai email ujedkemal@gmail.com dan passwordnya tidak sesuai standar, jadi dihilangkan dulu utk test post login*/
+const pwRgx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/;
+const LOGIN_URL = "/auth/login";
 
 const LoginPageForm = () => {
+  const [errMsg, setErrMsg] = useState("");
+
   const navigate = useNavigate();
 
-  const registerUser = () => {
+  const registerUser = async (values) => {
     alert("Submit form!");
+    try {
+      const response = await axios
+        .post(
+          LOGIN_URL,
+          JSON.stringify(values),
+          console.log(JSON.stringify(values)),
+
+          {
+            headers: { "Content-Type": "application/json" },
+          }
+        )
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
+      console.log(response?.data);
+      console.log(response?.accessToken);
+      console.log(JSON.stringify(response));
+      navigate("/home");
+    } catch (err) {
+      if (!err.response) {
+        setErrMsg("No Server Response");
+      } else if (err.response === 409) {
+        setErrMsg("wrong password");
+      } else {
+        setErrMsg("Login failed");
+      }
+    }
   };
 
   const formik = useFormik({
@@ -26,7 +61,7 @@ const LoginPageForm = () => {
         .string()
         .required()
         .matches(
-          /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[-_+=!@#$%^&*])(?=.{8,})/,
+          pwRgx,
           "password must consist capital letters, lowercase, number, and special character"
         ),
     }),
@@ -35,10 +70,6 @@ const LoginPageForm = () => {
   const handleForm = (event) => {
     const { target } = event;
     formik.setFieldValue(target.name, target.value);
-  };
-
-  const handleNavigate = () => {
-    navigate("/home");
   };
 
   return (
@@ -50,6 +81,11 @@ const LoginPageForm = () => {
             <h1 className="font-poppins font-bold mt-4">Log in</h1>
           </div>
           <form onSubmit={formik.handleSubmit}>
+            {errMsg ? (
+              <div className="w-full bg-red-200 text-red-700 h-10 flex justify-center items-center mt-2">
+                <p>{errMsg}</p>
+              </div>
+            ) : null}
             <div className="grid gap-2 p-5">
               <FormControl
                 className="flex flex-col"
@@ -61,6 +97,7 @@ const LoginPageForm = () => {
                   type="text"
                   name="username"
                   className="py-1 px-2 border-2 border-blue-600 rounded-full"
+                  autoComplete="off"
                 />
                 <FormErrorMessage className="text-red-500 text-sm font-medium">
                   {formik.errors.username}
@@ -76,6 +113,7 @@ const LoginPageForm = () => {
                   type="email"
                   name="email"
                   className="py-1 px-2 border-2 border-blue-600 rounded-full"
+                  autoComplete="off"
                 />
                 <FormErrorMessage className="text-red-500 text-sm font-medium">
                   {formik.errors.email}
@@ -91,6 +129,7 @@ const LoginPageForm = () => {
                   type="password"
                   name="password"
                   className="py-1 px-2 border-2 border-blue-600 rounded-full"
+                  autoComplete="off"
                 />
                 <FormErrorMessage className="text-red-500 text-sm font-medium">
                   {formik.errors.password}
@@ -100,7 +139,6 @@ const LoginPageForm = () => {
             <div className="flex flex-col justify-center items-center mb-5 ">
               <button
                 type="submit"
-                onClick={handleNavigate}
                 className="bg-blue-500 w-fit p-2 rounded-md text-center"
               >
                 Log in

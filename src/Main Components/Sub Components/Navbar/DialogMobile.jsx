@@ -4,6 +4,7 @@ import {
   MagnifyingGlassCircleIcon,
 } from "@heroicons/react/24/outline";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import { Link } from "react-router-dom";
 
 import logoDPR from "../../../assets/DPR.png";
 
@@ -43,7 +44,7 @@ const DialogMobile = ({
                   {({ open }) => (
                     <>
                       <Disclosure.Button className="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 hover:bg-gray-50">
-                        Product
+                        Write and read your own blog
                         <ChevronDownIcon
                           className={classNames(
                             open ? "rotate-180" : "",
@@ -60,7 +61,7 @@ const DialogMobile = ({
                             href={item.href}
                             className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                           >
-                            {item.name}
+                            <Link to={item.link}>{item.name}</Link>
                           </Disclosure.Button>
                         ))}
                       </Disclosure.Panel>
