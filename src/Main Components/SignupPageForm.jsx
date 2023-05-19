@@ -1,18 +1,16 @@
 import { FormControl, FormErrorMessage } from "@chakra-ui/react";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { useNavigate } from "react-router-dom";
+
 import Navbar from "./Navbar";
 
 const SignupPageForm = () => {
-  const navigate = useNavigate();
-
   const registerUser = () => {
     alert("Submit form!");
   };
 
   const pwRgx =
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[-_+=!@#$%^&*])(?=.{8,})/;
 
   const phoneRgx =
     /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -21,13 +19,20 @@ const SignupPageForm = () => {
     initialValues: {
       username: "",
       email: "",
-      password: "",
       phoneNumber: "",
+      password: "",
+      confirmPassword: "",
     },
     onSubmit: registerUser,
     validationSchema: yup.object().shape({
       username: yup.string().required().min(3).max(10),
       email: yup.string().required("email wajib diisi").email(),
+      phoneNumber: yup
+        .string()
+        .required("required")
+        .min(10)
+        .max(13)
+        .matches(phoneRgx, "Phone number is not valid"),
       password: yup
         .string()
         .min(6)
@@ -36,19 +41,23 @@ const SignupPageForm = () => {
           pwRgx,
           "Kata sandi harus ada huruf besar, huruf kecil, angka, dan karakter spesial"
         ),
-      phoneNumber: yup
+      confirmPassword: yup
         .string()
-        .required("required")
-        .min(10)
-        .max(13)
-        .matches(phoneRgx, "Phone number is not valid"),
+        .oneOf(
+          [yup.ref("password"), null],
+          "Konfirmasi password harus sesuai dengan password"
+        )
+        .matches(
+          pwRgx,
+          "Kata sandi harus ada huruf besar, huruf kecil, angka, dan karakter spesial"
+        )
+        .required("Konfirmasi password harus diisi"),
     }),
   });
 
   const handleForm = (event) => {
     const { target } = event;
     formik.setFieldValue(target.name, target.value);
-    navigate("/home");
   };
   return (
     <>
@@ -94,6 +103,21 @@ const SignupPageForm = () => {
                 className="flex flex-col"
                 isInvalid={formik.errors.password}
               >
+                <label>Phone Number</label>
+                <input
+                  onChange={handleForm}
+                  type="phoneNumber"
+                  name="phoneNumber"
+                  className="py-1 px-2 border-2 border-blue-600 rounded-full"
+                />
+                <FormErrorMessage className="text-red-500 text-sm font-medium">
+                  {formik.errors.phoneNumber}
+                </FormErrorMessage>
+              </FormControl>
+              <FormControl
+                className="flex flex-col"
+                isInvalid={formik.errors.password}
+              >
                 <label>Password</label>
                 <input
                   onChange={handleForm}
@@ -107,19 +131,20 @@ const SignupPageForm = () => {
               </FormControl>
               <FormControl
                 className="flex flex-col"
-                isInvalid={formik.errors.password}
+                isInvalid={formik.errors.confirmPassword}
               >
-                <label>Phone Number</label>
+                <label>Confirm Password</label>
                 <input
                   onChange={handleForm}
-                  type="phoneNumber"
-                  name="phoneNumber"
+                  type="password"
+                  name="confirmPassword"
                   className="py-1 px-2 border-2 border-blue-600 rounded-full"
                 />
                 <FormErrorMessage className="text-red-500 text-sm font-medium">
-                  {formik.errors.phoneNumber}
+                  {formik.errors.confirmPassword}
                 </FormErrorMessage>
               </FormControl>
+
               <div className="flex flex-col justify-center items-center mt-3">
                 <button
                   type="submit"

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const AsideLeft = () => {
   return (
-    <aside className="columns-1 border-2 border-red-500 h-screen sticky top-0">
+    <aside className="columns-1 border-2 border-red-500 h-screen sticky top-0 bg-blue-500">
       <nav>
         <div className="flex justify-center mt-10 ">
           <img
@@ -11,8 +11,8 @@ const AsideLeft = () => {
             className="rounded-full"
           />
         </div>
-        <p className="text-center mt-3">@usaidaka</p>
-        <div className="flex justify-evenly text-center mt-5">
+        <p className="text-center mt-3 text-white">@usaidaka</p>
+        <div className="flex justify-evenly text-center mt-5 text-white">
           <div className="">
             <h5>45</h5>
             <p>Post</p>
@@ -27,17 +27,17 @@ const AsideLeft = () => {
           </div>
         </div>
         <div className="ml-5 mt-10 text-2xl font-poppins font-extrabold">
-          <ul className="flex flex-col gap-3 ">
-            <li className="w-fit hover:text-blue-600 transition-all ">
+          <ul className="flex flex-col gap-3 text-white ">
+            <li className="w-fit hover:text-gray-200 transition-all ">
               <Link to="/home">HOME</Link>
             </li>
-            <li className="w-fit hover:text-blue-600 transition-all">
-              <Link to="/home">PROFILE</Link>
+            <li className="w-fit hover:text-gray-200 transition-all">
+              <Link to="/profile">PROFILE</Link>
             </li>
-            <li className="w-fit hover:text-blue-600 transition-all">
-              <Link to="/home">SETTING</Link>
+            <li className="w-fit hover:text-gray-200 transition-all">
+              <Link to="/setting">SETTING</Link>
             </li>
-            <li className="w-fit hover:text-blue-600 transition-all">
+            <li className="w-fit hover:text-gray-200 transition-all">
               <Link to="/">LOG OUT</Link>
             </li>
           </ul>
