@@ -1,10 +1,16 @@
 import { Link } from "react-router-dom";
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
+import dayjs from "dayjs";
+import "dayjs/locale/id";
+
 import EachSectionMiddleInfo from "./EachSectionMiddleInfo";
 
-const EachSectionMiddle = () => {
+const EachSectionMiddle = ({ eachBlog }) => {
+  const date = dayjs(eachBlog?.createdAt);
+  const formattedDate = date.format("DD MMMM YYYY");
+
   return (
-    <div className="grid grid-cols-4 bg-gray-100 rounded-lg mt-5 w-fit">
+    <div className="grid grid-cols-4 bg-gray-100 rounded-lg mt-5 w-fit mb-10">
       <div className="columns-1 flex justify-center items-center mr-3">
         <Link to="">
           <img
@@ -15,17 +21,15 @@ const EachSectionMiddle = () => {
         </Link>
       </div>
       <div className="col-span-3 flex flex-col gap-4 mt-2">
-        <h1 className="text-3xl">Lorem ipsum dolor sit amet.</h1>
-        <EachSectionMiddleInfo />
+        <h1 className="text-3xl">{eachBlog?.title}</h1>
+        <EachSectionMiddleInfo
+          formattedDate={formattedDate}
+          eachBlog={eachBlog}
+        />
         <div className="grid gap-3">
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam vel
-            animi magni? Aliquam nisi expedita voluptatem repellendus dolore
-            obcaecati voluptatum similique eaque culpa suscipit consequatur
-            optio, est quidem nobis corporis?
-          </p>
+          <p>{eachBlog?.content.slice(0, 150)} ...</p>
           <Link
-            to=""
+            to={`/post/${eachBlog.id}`}
             className="flex justify-start items-center text-blue-600 mb-3"
           >
             Read More <ChevronRightIcon className="w-4" />

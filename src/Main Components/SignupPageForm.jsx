@@ -3,10 +3,10 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import { Link } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
-import axios from "../API/axios";
 
+import axios from "../API/axios";
 import Navbar from "./Navbar";
-import LoginPageForm from "./LoginPageForm";
+import VerifyPage from "./VerifyPage";
 
 /* VARIABLE STORE */
 const pwRgx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[-_+=!@#$%^&*])(?=.{8,})/;
@@ -17,37 +17,42 @@ const REGISTER_URL = "/auth";
 const SignupPageForm = () => {
   const userRef = useRef();
 
-  const [success, setSuccess] = useState(false);
   const [errMsg, setErrMsg] = useState("");
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     userRef.current.focus();
   }, []);
 
-  const registerUser = async (values) => {
+  const registerUser = async (values, { setStatus, resetForm }) => {
     alert("Submit form!");
     try {
-      const response = await axios
-        .post(
-          REGISTER_URL,
-          JSON.stringify(values),
-          console.log(JSON.stringify(values)),
+      const response = await axios.post(REGISTER_URL, values, {
+        headers: { "Content-Type": "application/json" },
+      });
 
-          {
-            headers: { "Content-Type": "application/json" },
-          }
-        )
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err));
-      console.log(response?.data);
-      console.log(response?.accessToken);
-      console.log(JSON.stringify(response));
-      setSuccess(true);
+      if (response.status === 200) {
+        const token = response.data;
+        console.log("Token:", token);
+        resetForm();
+        setStatus({ success: true, token });
+        setStatus({
+          success: true,
+          message:
+            "Sign up successful. Please check your email for verification.",
+        });
+        setIsVisible(true);
+      } else {
+        throw new Error("Login Failed");
+      }
     } catch (err) {
+      console.log(err);
       if (!err.response) {
         setErrMsg("No Server Response");
-      } else if (err.response === 409) {
+      } else if (err.response?.status === 409) {
         setErrMsg("Username taken");
+      } else if (err.response?.status === 400) {
+        setErrMsg("Email already used");
       } else {
         setErrMsg("Registration failed");
       }
@@ -64,7 +69,7 @@ const SignupPageForm = () => {
     },
     onSubmit: registerUser,
     validationSchema: yup.object().shape({
-      username: yup.string().required().min(3).max(10),
+      username: yup.string().required().min(3).max(20),
       email: yup.string().required("email wajib diisi").email(),
       phone: yup
         .string()
@@ -101,8 +106,8 @@ const SignupPageForm = () => {
 
   return (
     <>
-      {success ? (
-        <LoginPageForm />
+      {isVisible ? (
+        <VerifyPage />
       ) : (
         <>
           <Navbar />
@@ -209,7 +214,7 @@ const SignupPageForm = () => {
                       Register Account
                     </button>
                   </div>
-                  <div>
+                  <div className="flex flex-row justify-center items-center">
                     <span>Already registered? </span>
                     <Link
                       to="/loginpageform"

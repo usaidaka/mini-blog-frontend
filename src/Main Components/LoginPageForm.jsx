@@ -2,61 +2,80 @@ import { FormControl, FormErrorMessage } from "@chakra-ui/react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useState } from "react";
 
 import Navbar from "./Navbar";
-import { useState } from "react";
 import axios from "../API/axios";
+import { EyeIcon } from "@heroicons/react/24/outline";
 
 /* VARIABLE STORE */
-/* pwRgx untuk sesuai requirement (?=.*[-_+=!@#$%^&*]) karena udah terlanjur daftar pakai email ujedkemal@gmail.com dan passwordnya tidak sesuai standar, jadi dihilangkan dulu utk test post login*/
-const pwRgx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/;
+const pwRgx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[-_+=!@#$%^&*])(?=.{8,})/;
 const LOGIN_URL = "/auth/login";
+const KEEP_LOGIN = "/auth";
 
 const LoginPageForm = () => {
-  const [errMsg, setErrMsg] = useState("");
-
   const navigate = useNavigate();
 
-  const registerUser = async (values) => {
+  const [errMsg, setErrMsg] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+
+  const loginUser = async (values) => {
     alert("Submit form!");
     try {
-      const response = await axios
-        .post(
-          LOGIN_URL,
-          JSON.stringify(values),
-          console.log(JSON.stringify(values)),
+      await axios
+        .post(LOGIN_URL, values, {
+          headers: { "Content-Type": "application/json" },
+        })
+        .then(async (res) => {
+          const accessToken = res?.data?.token;
+          localStorage.setItem("token", accessToken);
 
-          {
-            headers: { "Content-Type": "application/json" },
+          const token = localStorage.getItem("token");
+          if (token) {
+            axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+            try {
+              await axios.get(KEEP_LOGIN);
+              navigate("/home");
+            } catch (error) {
+              localStorage.removeItem("token");
+
+              navigate("/loginpageform");
+            }
+          } else if (!token) {
+            navigate("/loginpageform");
           }
-        )
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err));
-      console.log(response?.data);
-      console.log(response?.accessToken);
-      console.log(JSON.stringify(response));
-      navigate("/home");
+
+          // setSuccess(true);
+        })
+        .catch((err) => {
+          if (!err.response) {
+            setErrMsg("No Server Response");
+          } else if (err.response?.status === 400) {
+            setErrMsg("Missing Username or Password");
+          } else if (err.response?.status === 401) {
+            setErrMsg("Unauthorized");
+          } else {
+            setErrMsg("Login failed");
+          }
+        });
     } catch (err) {
-      if (!err.response) {
-        setErrMsg("No Server Response");
-      } else if (err.response === 409) {
-        setErrMsg("wrong password");
-      } else {
-        setErrMsg("Login failed");
-      }
+      throw new Error("Log in Error occur");
     }
+  };
+
+  const togglePassword = () => {
+    setShowPassword(!showPassword);
   };
 
   const formik = useFormik({
     initialValues: {
       username: "",
-      email: "",
       password: "",
     },
-    onSubmit: registerUser,
+    onSubmit: loginUser,
     validationSchema: yup.object().shape({
       username: yup.string().required().min(3).max(10),
-      email: yup.string().required("email wajib diisi").email(),
       password: yup
         .string()
         .required()
@@ -107,26 +126,10 @@ const LoginPageForm = () => {
                 className="flex flex-col"
                 isInvalid={formik.errors.email}
               >
-                <label>Email</label>
-                <input
-                  onChange={handleForm}
-                  type="email"
-                  name="email"
-                  className="py-1 px-2 border-2 border-blue-600 rounded-full"
-                  autoComplete="off"
-                />
-                <FormErrorMessage className="text-red-500 text-sm font-medium">
-                  {formik.errors.email}
-                </FormErrorMessage>
-              </FormControl>
-              <FormControl
-                className="flex flex-col"
-                isInvalid={formik.errors.password}
-              >
                 <label>Password</label>
                 <input
                   onChange={handleForm}
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   name="password"
                   className="py-1 px-2 border-2 border-blue-600 rounded-full"
                   autoComplete="off"
@@ -143,6 +146,24 @@ const LoginPageForm = () => {
               >
                 Log in
               </button>
+              <button
+                type="submit"
+                className="w-fit p-2 rounded-md text-center"
+                onClick={togglePassword}
+              >
+                <span className="flex">
+                  show password <EyeIcon className="w-5" />
+                </span>
+              </button>
+              <div className="mt-5">
+                <span>Need an account? </span>
+                <Link
+                  to="/loginpageform"
+                  className="text-blue-800 underline underline-offset-2 hover:text-white transition-all"
+                >
+                  Sign up
+                </Link>
+              </div>
             </div>
           </form>
         </div>

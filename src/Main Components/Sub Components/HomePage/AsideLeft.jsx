@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const AsideLeft = () => {
+  const navigate = useNavigate();
   return (
     <aside className="columns-1 border-2 border-red-500 h-screen sticky top-0 bg-blue-500">
       <nav>
@@ -38,7 +40,14 @@ const AsideLeft = () => {
               <Link to="/setting">SETTING</Link>
             </li>
             <li className="w-fit hover:text-gray-200 transition-all">
-              <Link to="/">LOG OUT</Link>
+              <button
+                onClick={() => {
+                  localStorage.removeItem("token");
+                  navigate("/loginpageform");
+                }}
+              >
+                LOG OUT
+              </button>
             </li>
           </ul>
         </div>
