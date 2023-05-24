@@ -3,7 +3,6 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../API/axios";
 
 const GET_POSTS_BLOG = "/blog";
-const AUTH_ACCESS = "/auth";
 
 export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
   try {
@@ -11,19 +10,6 @@ export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
     return response.data;
   } catch (error) {
     console.log("Error di postSlice", error);
-  }
-});
-
-export const accessAll = createAsyncThunk("posts/access", async () => {
-  try {
-    const response = await axios.get(AUTH_ACCESS, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    });
-    return response;
-  } catch (error) {
-    console.log(error);
   }
 });
 

@@ -10,7 +10,7 @@ import axios from "../API/axios";
 import { EyeIcon } from "@heroicons/react/24/outline";
 
 /* VARIABLE STORE */
-const pwRgx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[-_+=!@#$%^&*])(?=.{8,})/;
+
 const LOGIN_URL = "/auth/login";
 const KEEP_LOGIN = "/auth";
 
@@ -76,13 +76,7 @@ const LoginPageForm = () => {
     onSubmit: loginUser,
     validationSchema: yup.object().shape({
       username: yup.string().required().min(3).max(10),
-      password: yup
-        .string()
-        .required()
-        .matches(
-          pwRgx,
-          "password must consist capital letters, lowercase, number, and special character"
-        ),
+      password: yup.string().required(),
     }),
   });
 

@@ -1,23 +1,37 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCategory } from "../../../features/categorySlice";
+import { Link } from "react-router-dom";
+
 const AsideRightCategory = () => {
+  const cat = useSelector((state) => state.category);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchCategory());
+  }, [dispatch]);
+
+  if (cat.loading) {
+    return <p>loading</p>;
+  }
+
+  const newCategory = cat.posts;
+
   return (
     <div className="row-span-1 border-2 border-red-400">
       <h1 className="font-satisfy text-2xl">Category</h1>
       <div className="mt-1">
-        <ul>
-          <li className="font-poppins border-b-2 border-gray-200 mt-1">
-            Fashion
-          </li>
-          <li className="font-poppins border-b-2 border-gray-200 mt-1">
-            Technology
-          </li>
-          <li className="font-poppins border-b-2 border-gray-200 mt-1">
-            Travel
-          </li>
-          <li className="font-poppins border-b-2 border-gray-200 mt-1">Food</li>
-          <li className="font-poppins border-b-2 border-gray-200 mt-1">
-            Photography
-          </li>
-        </ul>
+        {newCategory.map((cat) => (
+          <>
+            <ul key={cat.id}>
+              <li>
+                <Link to={`/category/${cat.id}`} key={cat.id}>
+                  {cat.name}
+                </Link>
+              </li>
+            </ul>
+          </>
+        ))}
       </div>
     </div>
   );

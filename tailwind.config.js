@@ -1,7 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 import scrollbarHide from "tailwind-scrollbar-hide";
 export default {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+    "node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}",
+  ],
   theme: {
     extend: {
       backgroundImage: {
@@ -10,6 +14,7 @@ export default {
       fontFamily: {
         poppins: ["Poppins"],
         satisfy: ["Satisfy", "cursive"],
+        fira: ["Fira Sans Condensed", "sans-serif"],
       },
       height: {
         104: "26rem",

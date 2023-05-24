@@ -1,8 +1,24 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { accessAll } from "../../../features/authSlice";
 
 const AsideLeft = () => {
+  const auth = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch(accessAll());
+  }, [dispatch]);
+
+  if (auth.loading) {
+    return <p>loading</p>;
+  }
+
+  const newAuth = auth.auth;
+
   return (
     <aside className="columns-1 border-2 border-red-500 h-screen sticky top-0 bg-blue-500">
       <nav>
@@ -13,21 +29,7 @@ const AsideLeft = () => {
             className="rounded-full"
           />
         </div>
-        <p className="text-center mt-3 text-white">@usaidaka</p>
-        <div className="flex justify-evenly text-center mt-5 text-white">
-          <div className="">
-            <h5>45</h5>
-            <p>Post</p>
-          </div>
-          <div className="">
-            <h5>1,545</h5>
-            <p>followers</p>
-          </div>
-          <div className="">
-            <h5>18K</h5>
-            <p>Likes</p>
-          </div>
-        </div>
+        <p className="text-center mt-3 text-white">@{newAuth.username}</p>
         <div className="ml-5 mt-10 text-2xl font-poppins font-extrabold">
           <ul className="flex flex-col gap-3 text-white ">
             <li className="w-fit hover:text-gray-200 transition-all ">
@@ -35,6 +37,12 @@ const AsideLeft = () => {
             </li>
             <li className="w-fit hover:text-gray-200 transition-all">
               <Link to="/profile">PROFILE</Link>
+            </li>
+            <li className="w-fit hover:text-gray-200 transition-all">
+              <Link to="/searchpage">SEARCH</Link>
+            </li>
+            <li className="w-fit hover:text-gray-200 transition-all">
+              <Link to="/cretaeblog">CREATE BLOG</Link>
             </li>
             <li className="w-fit hover:text-gray-200 transition-all">
               <Link to="/setting">SETTING</Link>

@@ -4,8 +4,23 @@ import {
 } from "@heroicons/react/24/outline";
 
 import CardCarousel from "./CardCarousel";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { fetchPosts } from "../../../features/postsSlice";
 
 const PosterRightBottom = ({ scrollLeft, scrollRight }) => {
+  const posts = useSelector((state) => state.posts);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchPosts());
+  }, [dispatch]);
+
+  if (posts.loading) {
+    return <p>loading</p>;
+  }
+
+  const newPosts = posts.posts.result;
   return (
     <>
       <div className=" row-1 min-w-full snap-x snap-mandatory grid justify-center">
@@ -18,35 +33,10 @@ const PosterRightBottom = ({ scrollLeft, scrollRight }) => {
           id="card"
           className="scrollbar-hide flex items-center justify-start  lg:overflow-x-auto gap-x-2 snap-mandatory snap-x scroll-smooth "
         >
-          <div className="snap-center">
-            <CardCarousel />
-          </div>
-          <div className="snap-center">
-            <CardCarousel />
-          </div>
-          <div className="snap-center">
-            <CardCarousel />
-          </div>
-          <div className="snap-center">
-            <CardCarousel />
-          </div>
-          <div className="snap-center">
-            <CardCarousel />
-          </div>
-          <div className="snap-center">
-            <CardCarousel />
-          </div>
-          <div className="snap-center">
-            <CardCarousel />
-          </div>
-          <div className="snap-center">
-            <CardCarousel />
-          </div>
-          <div className="snap-center">
-            <CardCarousel />
-          </div>
-          <div className="snap-center">
-            <CardCarousel />
+          <div className="snap-center flex gap-2">
+            {newPosts.map((post) => (
+              <CardCarousel key={post.id} post={post} />
+            ))}
           </div>
         </div>
         <div className="flex justify-evenly">
