@@ -1,25 +1,34 @@
+import { Carousel } from "flowbite-react";
+import { useSelector } from "react-redux";
+
 const PostBlogPart = () => {
+  const posts = useSelector((state) => state.posts);
+
+  const newPosts = posts.posts.result;
+
   return (
-    <section>
-      <div className="bg-gray-200 mt-5 rounded-2xl p-5">
-        <form action="" className="flex flex-col gap-2">
-          <label htmlFor="">Title</label>
-          <input
-            type="text"
-            className="border-2 border-black rounded-md px-1"
-          />
-          <label htmlFor="">Blog something</label>
-          <textarea
-            name=""
-            className="resize-none border-2 border-black h-44 rounded-md px-1"
-          ></textarea>
-          <div className="flex justify-end ">
-            <button className="bg-blue-500 text-white font-poppins w-24 h-7 mt-4 rounded-md">
-              Post
-            </button>
-          </div>
-        </form>
-      </div>
+    <section className="">
+      <Carousel>
+        {newPosts.map((post) => (
+          <>
+            <div className="border-4 rounded-xl h-96 flex flex-col">
+              <div className=" h-full w-full">
+                <div className="">
+                  <img
+                    src={`https://minpro-blog.purwadhikabootcamp.com/${newPosts.imageURL}`}
+                    alt="image"
+                    className="w-96 h-80 "
+                  />
+                  <figcaption className=""></figcaption>
+                </div>
+                <div className=" h-full">
+                  <h1 className="text-2xl">{post.title}</h1>
+                </div>
+              </div>
+            </div>
+          </>
+        ))}
+      </Carousel>
     </section>
   );
 };

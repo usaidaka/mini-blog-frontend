@@ -23,7 +23,9 @@ const EachSectionMiddleInfo = ({ eachBlog, formattedDate }) => {
         <p>Likes 9</p>
       </div>
       <div>
-        <p className="font-semibold italic">By {eachBlog.User.username}</p>
+        <p className="font-semibold text-xs italic">
+          By {eachBlog.User.username}
+        </p>
       </div>
     </div>
   );

@@ -1,4 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 
 import Poster from "./Main Components/Poster";
 import LoginPageForm from "./Main Components/LoginPageForm";
@@ -16,8 +18,22 @@ import SetPhone from "./Main Components/Sub Components/Setting/SetPhone";
 import SetPassword from "./Main Components/Sub Components/Setting/SetPassword";
 import SearchPage from "./Main Components/SearchPage";
 import CreateBlog from "./Main Components/CreateBlog";
+import SinglePostPageGuest from "./Main Components/Sub Components/Post/SinglePostPageGuest";
+import { postLike, userBlog } from "./features/userBlogSlice";
+import { keep } from "./features/getTokenSlice";
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      dispatch(keep(localStorage.getItem("token")));
+      dispatch(userBlog(localStorage.getItem("token"))).then((likeResponse) => {
+        dispatch(postLike(likeResponse.data));
+      });
+    }
+  }, [dispatch]);
+
   return (
     <Router>
       <Routes>
@@ -40,6 +56,9 @@ function App() {
           <Route path=":postId" element={<SinglePostPage />} />
         </Route>
         <Route path="/category/:categoryId" element={<CategoryPostPage />} />
+        <Route path="/guest">
+          <Route path=":postId" element={<SinglePostPageGuest />} />
+        </Route>
       </Routes>
       <Footer />
     </Router>

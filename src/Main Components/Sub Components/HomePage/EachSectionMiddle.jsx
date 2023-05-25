@@ -10,18 +10,18 @@ const EachSectionMiddle = ({ eachBlog }) => {
   const formattedDate = date.format("DD MMMM YYYY");
 
   return (
-    <div className="grid grid-cols-4 bg-gray-100 rounded-lg mt-5 w-fit mb-10">
-      <div className="columns-1 flex justify-center items-center mr-3">
-        <Link to="">
+    <div className="grid grid-cols-2 bg-gray-100 rounded-lg mt-5 w-104 mb-10 mx-10">
+      <div className="columns-1 flex justify-center items-center mr-3 w-full">
+        <div className="">
           <img
-            src="https://source.unsplash.com/random?orientation=landscape&category=technology&size=200x200"
+            src={`https://minpro-blog.purwadhikabootcamp.com/${eachBlog.imageURL}`}
             alt=""
-            className="rounded-full w-36"
+            className=" w-80"
           />
-        </Link>
+        </div>
       </div>
       <div className="col-span-3 flex flex-col gap-4 mt-2">
-        <h1 className="text-3xl">{eachBlog?.title}</h1>
+        <h1 className="text-xl">{eachBlog?.title}</h1>
         <EachSectionMiddleInfo
           formattedDate={formattedDate}
           eachBlog={eachBlog}

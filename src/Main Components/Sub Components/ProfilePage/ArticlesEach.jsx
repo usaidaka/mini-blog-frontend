@@ -4,10 +4,29 @@ import { CalendarDaysIcon, HeartIcon } from "@heroicons/react/24/outline";
 import { Folder } from "@mui/icons-material";
 import dayjs from "dayjs";
 
-const ArticlesEach = ({ userBlog }) => {
+import { useEffect } from "react";
+
+import { useDispatch, useSelector } from "react-redux";
+import { userBlog } from "../../../features/userBlogSlice";
+
+const ArticlesEach = () => {
+  const user = useSelector((state) => state.userBlog);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(userBlog());
+  }, [dispatch]);
+
+  if (user.loading) {
+    return <p className="w-screen h-screen">Loading</p>;
+  }
+
+  const postUser = user.user;
+  console.log(postUser);
+
   const date = dayjs(userBlog.createdAt);
   const formattedDate = date.format("DD MMMM YYYY");
-  console.log(formattedDate);
+
   return (
     <div className="grid grid-cols-4 bg-gray-100 rounded-lg mt-5 w-[40%] px-2">
       <div className="columns-1 flex justify-center items-center mr-3">
@@ -20,7 +39,7 @@ const ArticlesEach = ({ userBlog }) => {
         </Link>
       </div>
       <div className="col-span-3 flex flex-col gap-4 mt-2">
-        <h1 className="text-3xl">{userBlog.title}</h1>
+        <h1 className="text-3xl">{postUser.title}</h1>
         <div className="flex justify-start gap-3">
           <div className="flex justify-start items-center gap-1">
             <p className="w-6">
@@ -32,7 +51,7 @@ const ArticlesEach = ({ userBlog }) => {
             <p className="w-5">
               <Folder />
             </p>
-            <p>{userBlog.Category.name}</p>
+            <p>{/* {userBlog.Category.name} */}</p>
           </div>
           <div className="flex justify-start items-center gap-1">
             <p className="w-6">
@@ -42,7 +61,7 @@ const ArticlesEach = ({ userBlog }) => {
           </div>
         </div>
         <div className="grid gap-3">
-          <p>{userBlog?.content.slice(0, 150)} ...</p>
+          <p>{/* {userBlog?.content.slice(0, 150)} .. */}.</p>
           <Link
             to={`/post/${userBlog.id}`}
             className="flex justify-start items-center text-blue-600 mb-3"

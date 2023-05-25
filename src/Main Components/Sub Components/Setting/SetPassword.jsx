@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import * as yup from "yup";
-
-import { changePass } from "../../../features/changePwdSlice";
 import { useFormik } from "formik";
-import { FormControl, FormErrorMessage } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+
+import { changePass } from "../../../features/changePwdSlice";
+import { FormControl, FormErrorMessage } from "@chakra-ui/react";
 import AsideLeft from "../HomePage/AsideLeft";
 
 const pwRgx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[-_+=!@#$%^&*])(?=.{8,})/;

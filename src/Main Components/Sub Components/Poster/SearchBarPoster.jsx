@@ -305,7 +305,7 @@ const SearchBarPoster = () => {
                       <div className="grid gap-3">
                         <p>{result?.content.slice(0, 150)} ...</p>
                         <Link
-                          to={`/${result.id}`}
+                          to={`/guest/${result.id}`}
                           className="flex justify-start items-center text-blue-600 mb-3"
                         >
                           Read More <ChevronRightIcon className="w-4" />

@@ -19,6 +19,9 @@ export default {
       height: {
         104: "26rem",
       },
+      width: {
+        104: "26rem",
+      },
       columns: {
         0.75: "0.75",
       },

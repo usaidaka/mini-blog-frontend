@@ -14,7 +14,7 @@ const SectionMiddle = () => {
   }, [dispatch]);
 
   if (posts.loading) {
-    return <p>loading</p>;
+    return <p className="h-screen">loading</p>;
   }
 
   const newPosts = posts.posts.result;
@@ -22,9 +22,11 @@ const SectionMiddle = () => {
   return (
     <section className="col-span-4 border-2 border-yellow-500 ">
       <PostBlogPart />
-      {newPosts.map((eachBlog) => (
-        <EachSectionMiddle key={eachBlog.id} eachBlog={eachBlog} />
-      ))}
+      <div className="grid grid-cols-2 w-full ">
+        {newPosts.map((eachBlog) => (
+          <EachSectionMiddle key={eachBlog.id} eachBlog={eachBlog} />
+        ))}
+      </div>
     </section>
   );
 };

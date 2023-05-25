@@ -14,7 +14,7 @@ const AsideLeft = () => {
   }, [dispatch]);
 
   if (auth.loading) {
-    return <p>loading</p>;
+    return <p className="h-screen">loading</p>;
   }
 
   const newAuth = auth.auth;
@@ -42,7 +42,7 @@ const AsideLeft = () => {
               <Link to="/searchpage">SEARCH</Link>
             </li>
             <li className="w-fit hover:text-gray-200 transition-all">
-              <Link to="/cretaeblog">CREATE BLOG</Link>
+              <Link to="/createblog">CREATE BLOG</Link>
             </li>
             <li className="w-fit hover:text-gray-200 transition-all">
               <Link to="/setting">SETTING</Link>

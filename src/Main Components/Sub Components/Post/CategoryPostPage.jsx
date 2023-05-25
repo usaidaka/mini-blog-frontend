@@ -25,7 +25,7 @@ const CategoryPostPage = () => {
   }, [categoryId]);
 
   if (cat === "") {
-    return <p>Loading</p>;
+    return <p className="h-screen">Loading</p>;
   }
 
   console.log(cat);

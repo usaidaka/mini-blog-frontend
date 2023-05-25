@@ -1,26 +1,7 @@
-import { useEffect, useState } from "react";
-
-import AsideLeft from "./Sub Components/HomePage/AsideLeft";
 import Articles from "./Sub Components/ProfilePage/Articles";
-import axios from "../API/axios";
-
-const GET_BLOG = "/blog";
+import AsideLeft from "./Sub Components/HomePage/AsideLeft";
 
 const ProfilePage = () => {
-  const [blogList, setBlogList] = useState([]);
-
-  useEffect(() => {
-    axios.get(GET_BLOG).then((res) => {
-      setBlogList(res?.data?.result);
-      console.log(res?.data?.result);
-      console.log(
-        res?.data?.result
-          .filter((x) => x.User.username === "denoxet58")
-          .map((x) => console.log(x))
-      );
-    });
-  }, []);
-
   return (
     <div className="">
       <main className="grid grid-cols-6 justify-center gap-2">
@@ -52,7 +33,7 @@ const ProfilePage = () => {
               </form>
             </div>
           </section>
-          <Articles blogList={blogList} />
+          <Articles />
         </section>
       </main>
     </div>

@@ -8,6 +8,8 @@ import { useState } from "react";
 import Navbar from "./Navbar";
 import axios from "../API/axios";
 import { EyeIcon } from "@heroicons/react/24/outline";
+import { keep } from "../features/getTokenSlice";
+import { useDispatch } from "react-redux";
 
 /* VARIABLE STORE */
 
@@ -17,6 +19,7 @@ const KEEP_LOGIN = "/auth";
 const LoginPageForm = () => {
   const navigate = useNavigate();
 
+  const dispatch = useDispatch();
   const [errMsg, setErrMsg] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
@@ -29,6 +32,7 @@ const LoginPageForm = () => {
         })
         .then(async (res) => {
           const accessToken = res?.data?.token;
+          dispatch(keep(accessToken));
           localStorage.setItem("token", accessToken);
 
           const token = localStorage.getItem("token");

@@ -6,6 +6,11 @@ import authReducer from "../features/authSlice";
 import categoryReducer from "../features/categorySlice.jsx";
 import changeUsernameReducer from "../features/changeUsernameSlice";
 import changeEmailReducer from "../features/changeEmailSlice";
+import favReducer from "../features/favSlice";
+import userReducer from "../features/userBlogSlice";
+import getLikeReducer from "../features/getLikeSlice";
+import likePostReducer from "../features/likeSlice";
+import tokenReducer from "../features/getTokenSlice";
 
 export const store = configureStore({
   reducer: {
@@ -15,5 +20,10 @@ export const store = configureStore({
     changesPwd: changePwdReducer,
     changesUsername: changeUsernameReducer,
     changesEmail: changeEmailReducer,
+    pagFav: favReducer,
+    userBlog: userReducer,
+    likeInfo: getLikeReducer,
+    likePost: likePostReducer,
+    keepToken: tokenReducer,
   },
 });

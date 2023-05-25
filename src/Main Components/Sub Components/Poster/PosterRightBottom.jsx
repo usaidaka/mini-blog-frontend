@@ -17,7 +17,7 @@ const PosterRightBottom = ({ scrollLeft, scrollRight }) => {
   }, [dispatch]);
 
   if (posts.loading) {
-    return <p>loading</p>;
+    return <p className="h-screen">loading</p>;
   }
 
   const newPosts = posts.posts.result;
