@@ -2,7 +2,6 @@ import * as yup from "yup";
 import { useFormik } from "formik";
 
 import axios from "../../../API/axios";
-import { FormControl, FormErrorMessage } from "@chakra-ui/react";
 
 const LIKE_POST = "/blog/like";
 const LikePost = () => {

@@ -4,14 +4,17 @@ import axios from "../API/axios";
 
 const GET_POSTS_BLOG = "/blog";
 
-export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
-  try {
-    const response = await axios.get(GET_POSTS_BLOG);
-    return response.data;
-  } catch (error) {
-    console.log("Error di postSlice", error);
+export const fetchPosts = createAsyncThunk(
+  "posts/fetchPosts",
+  async (page = 1) => {
+    try {
+      const response = await axios.get(`${GET_POSTS_BLOG}?page=${page}`);
+      return response.data;
+    } catch (error) {
+      console.log("Error di postSlice", error);
+    }
   }
-});
+);
 
 const initialState = {
   posts: [],

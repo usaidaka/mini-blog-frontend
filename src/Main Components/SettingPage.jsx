@@ -7,7 +7,7 @@ const SettingPage = () => {
       <main className="grid grid-cols-6 justify-center gap-2">
         <AsideLeft />
         <SettingProfile />
-        <aside className="columns-1 border-2 border-green-500">
+        <aside className="columns-1 ">
           <h1>ASIDE RIGHT</h1>
         </aside>
       </main>

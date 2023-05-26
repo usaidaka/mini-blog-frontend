@@ -6,6 +6,7 @@ import { pagFav } from "../../../features/favSlice";
 
 const AsideRightTopArticle = () => {
   const fav = useSelector((state) => state.pagFav);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -19,12 +20,12 @@ const AsideRightTopArticle = () => {
   const newFav = fav.pagFav.result;
 
   return (
-    <div className="row-span-1 border-2 border-purple-600">
+    <div className="row-span-1">
       <h1>Top Article</h1>
       {newFav.map((post) => (
         <>
           <div className="grid grid-cols-3">
-            <AsideRightTopArticleEach post={post} />
+            <AsideRightTopArticleEach post={post} key={post.id} />
           </div>
         </>
       ))}

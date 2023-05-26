@@ -18,13 +18,14 @@ const AsideLeft = () => {
   }
 
   const newAuth = auth.auth;
+  // console.log(newAuth);
 
   return (
-    <aside className="columns-1 border-2 border-red-500 h-screen sticky top-0 bg-blue-500">
+    <aside className="columns-1 h-screen sticky top-0 bg-blue-500">
       <nav>
         <div className="flex justify-center mt-10 ">
           <img
-            src="https://source.unsplash.com/random?orientation=landscape&category=nature&size=100x100"
+            src={`https://minpro-blog.purwadhikabootcamp.com/${newAuth.imgProfile}`}
             alt=""
             className="rounded-full"
           />

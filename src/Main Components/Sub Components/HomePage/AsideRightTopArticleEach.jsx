@@ -10,7 +10,10 @@ const AsideRightTopArticleEach = ({ post }) => {
   const formattedDate = date.format("DD MMMM YYYY");
   return (
     <>
-      <div className="columns-1 grid justify-center items-center">
+      <div
+        className="columns-1 grid justify-center items-center p-1"
+        key={post.id}
+      >
         <img
           src="https://source.unsplash.com/random?orientation=human&category=technology&size=200x200"
           alt=""

@@ -21,6 +21,7 @@ const PosterRightBottom = ({ scrollLeft, scrollRight }) => {
   }
 
   const newPosts = posts.posts.result;
+
   return (
     <>
       <div className=" row-1 min-w-full snap-x snap-mandatory grid justify-center">
@@ -41,7 +42,7 @@ const PosterRightBottom = ({ scrollLeft, scrollRight }) => {
         </div>
         <div className="flex justify-evenly">
           <div className="flex justify-center items-center w-10 h-10 bg-white rounded-full drop-shadow-2xl border-4 border-gray-200 active:scale-90 transition-all">
-            <button onClick={scrollLeft} className="w-8 h-8 text-blue-400  ">
+            <button onClick={scrollLeft} className="w-8 h-8 text-blue-400 ">
               <ChevronDoubleLeftIcon />
             </button>
           </div>

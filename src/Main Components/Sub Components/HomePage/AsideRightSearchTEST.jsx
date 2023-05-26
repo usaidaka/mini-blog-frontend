@@ -3,7 +3,7 @@ import { SearchSharp } from "@mui/icons-material";
 const AsideRightSearch = () => {
   return (
     <div>
-      <form className="flex flex-col row-span-1  border-2 border-black mt-10">
+      <form className="flex flex-col row-span-1   mt-10">
         <p>Find your fav blog</p>
         <div className="flex justify-center items-center">
           <input

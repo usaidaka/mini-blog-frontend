@@ -42,9 +42,11 @@ const CreateBlog = () => {
       if (!err.response) {
         setErrMsg("No Server Response");
       } else if (err.response?.status === 409) {
-        setErrMsg("Username taken");
+        setErrMsg(
+          "indicates a request conflict with the current state of the target resource"
+        );
       } else if (err.response?.status === 400) {
-        setErrMsg("Email already used");
+        setErrMsg("Bad Request");
       } else {
         setErrMsg("Registration failed");
       }
@@ -58,16 +60,16 @@ const CreateBlog = () => {
       country: "",
       CategoryId: "",
       url: "",
-      keyword: "",
+      keywords: "",
     },
     onSubmit: createBlog,
     validationSchema: yup.object().shape({
       title: yup.string().required(),
-      content: yup.string().required(),
+      content: yup.string().required().max(255),
       country: yup.string().required(),
       CategoryId: yup.string().required(),
       url: yup.string(),
-      keyword: yup.string(),
+      keywords: yup.string(),
     }),
   });
 
@@ -93,10 +95,10 @@ const CreateBlog = () => {
     <div className="">
       <main className="grid grid-cols-6 justify-center gap-2">
         <AsideLeft />
-        <main className="">
+        <main className=" w-fit bg-slate-200">
           <div className="">
-            <div className="">
-              <h1 className="">CREATE BLOG</h1>
+            <div className=" flex justify-center items-center">
+              <h1 className="text-xl font-poppins mt-2">CREATE BLOG</h1>
             </div>
             <form onSubmit={formik.handleSubmit}>
               {errMsg ? (
@@ -127,11 +129,11 @@ const CreateBlog = () => {
                   isInvalid={formik.errors.content}
                 >
                   <label>Content</label>
-                  <input
+                  <textarea
                     onChange={handleForm}
                     type="text"
                     name="content"
-                    className="py-1 px-2 border-2 border-blue-600 rounded-full"
+                    className="py-1 px-2 w-104 h-52 border-2 border-blue-600 rounded-lg resize-none"
                     autoComplete="off"
                   />
                   <FormErrorMessage className="text-red-500 text-sm font-medium">
@@ -160,16 +162,12 @@ const CreateBlog = () => {
                   className="flex flex-col"
                   isInvalid={formik.errors.CategoryId}
                 >
-                  {/*   <label>Category</label>
-                  <input
+                  <label className="mt-1">Select your category</label>
+                  <select
                     onChange={handleForm}
-                    type="text"
                     name="CategoryId"
-                    className="py-1 px-2 border-2 border-blue-600 rounded-full"
-                    autoComplete="off"
-                  /> */}
-
-                  <select onChange={handleForm} name="CategoryId">
+                    className="border-2 border-blue-500 rounded-full p-1 "
+                  >
                     <option>All Categories</option>
                     {allCategory.map((post) => (
                       <>
@@ -210,7 +208,7 @@ const CreateBlog = () => {
                   <input
                     onChange={handleForm}
                     type="text"
-                    name="keyword"
+                    name="keywords"
                     className="py-1 px-2 border-2 border-blue-600 rounded-full"
                     autoComplete="off"
                   />
@@ -228,8 +226,9 @@ const CreateBlog = () => {
                     onChange={handleFile}
                     type="file"
                     name="photo"
-                    className="py-1 px-2 border-2 border-blue-600 rounded-full"
+                    className="py-1 px-2 rounded-full"
                     autoComplete="off"
+                    accept="image/png, image/gif, image/jpeg"
                   />
                   <FormErrorMessage className="text-red-500 text-sm font-medium">
                     {formik.errors.photo}

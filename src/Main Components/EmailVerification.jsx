@@ -20,7 +20,7 @@ const EmailVerification = () => {
 
   return (
     <>
-      <div className="h-screen bg-background-poster bg-bottom bg-covern">
+      <div className="h-screen bg-background-poster bg-bottom bg-cover">
         <LoginPageForm />
       </div>
     </>

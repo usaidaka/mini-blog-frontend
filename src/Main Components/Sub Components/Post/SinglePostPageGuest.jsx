@@ -24,14 +24,11 @@ const SinglePostPageGuest = () => {
 
   const newPosts = posts.posts.result;
 
-  const date = dayjs(newPosts.map((x) => x.createdAt));
-  const formattedDate = date.format("DD MMMM YYYY");
-
   return (
     <div className="">
       <Navbar />
       <main className="grid grid-cols-6 justify-center gap-2 h-screen">
-        <section className="col-span-6 border-2 border-yellow-500 mx-10 ">
+        <section className="col-span-6  mx-10 ">
           {newPosts
             .filter((blog) => blog.id === Number(postId))
             .map((post) => (
@@ -51,7 +48,7 @@ const SinglePostPageGuest = () => {
                         <p className="w-6">
                           <CalendarDaysIcon />
                         </p>
-                        <p>{formattedDate}</p>
+                        <p>{dayjs(post.createdAt).format("DD MMMM YYYY")}</p>
                       </div>
                       <div className="flex justify-start items-center gap-1">
                         <p className="w-5">

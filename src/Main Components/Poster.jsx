@@ -4,10 +4,10 @@ import PosterRightBottom from "./Sub Components/Poster/PosterRightBottom";
 import SearchBarPoster from "./Sub Components/Poster/SearchBarPoster";
 
 const scrollLeft = () => {
-  document.getElementById("card").scrollLeft -= 20;
+  document.getElementById("card").scrollLeft -= 400;
 };
 const scrollRight = () => {
-  document.getElementById("card").scrollLeft += 20;
+  document.getElementById("card").scrollLeft += 600;
 };
 
 const Poster = () => {

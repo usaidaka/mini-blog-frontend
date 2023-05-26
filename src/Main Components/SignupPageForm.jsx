@@ -112,7 +112,7 @@ const SignupPageForm = () => {
         <>
           <Navbar />
           <main className="grid justify-center items-center h-screen bg-background-poster bg-bottom bg-cover">
-            <div className="w-96 h-fit border-2 bg-green-400 rounded-3xl">
+            <div className="w-96 h-fit rounded-3xl bg-blue-300 drop-shadow-2xl">
               <div className="flex justify-center items-center mb-0">
                 <h1 className="font-poppins font-bold mt-4">Sign in</h1>
               </div>

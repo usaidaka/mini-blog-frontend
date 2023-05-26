@@ -19,28 +19,25 @@ import SetPassword from "./Main Components/Sub Components/Setting/SetPassword";
 import SearchPage from "./Main Components/SearchPage";
 import CreateBlog from "./Main Components/CreateBlog";
 import SinglePostPageGuest from "./Main Components/Sub Components/Post/SinglePostPageGuest";
-import { postLike, userBlog } from "./features/userBlogSlice";
-import { keep } from "./features/getTokenSlice";
+import { userBlog } from "./features/userBlogSlice";
+import { likeBlog } from "./features/likeBlogSlice";
+import ForgotPasswordPage from "./Main Components/ForgotPasswordPage";
 
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
-      dispatch(keep(localStorage.getItem("token")));
-      dispatch(userBlog(localStorage.getItem("token"))).then((likeResponse) => {
-        dispatch(postLike(likeResponse.data));
-      });
+      dispatch(userBlog(localStorage.getItem("token")));
+      dispatch(likeBlog());
     }
   }, [dispatch]);
 
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Poster />}>
-          <Route path=":blogId" element={<SinglePostPage />} />
-        </Route>
         <Route path="/loginpageform" element={<LoginPageForm />} />
+        <Route path="/forgotpassword" element={<ForgotPasswordPage />} />
         <Route path="/signuppageform" element={<SignupPageForm />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/setting" element={<SettingPage />} />
@@ -52,13 +49,16 @@ function App() {
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="verification/:token" element={<EmailVerification />} />
         <Route path="/searchpage" element={<SearchPage />} />
+        <Route path="/" element={<Poster />}>
+          <Route path=":blogId" element={<SinglePostPage />} />
+        </Route>
+        <Route path="/guest">
+          <Route path=":postId" element={<SinglePostPageGuest />} />
+        </Route>
         <Route path="/post">
           <Route path=":postId" element={<SinglePostPage />} />
         </Route>
         <Route path="/category/:categoryId" element={<CategoryPostPage />} />
-        <Route path="/guest">
-          <Route path=":postId" element={<SinglePostPageGuest />} />
-        </Route>
       </Routes>
       <Footer />
     </Router>

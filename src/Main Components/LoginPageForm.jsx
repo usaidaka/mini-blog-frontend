@@ -93,7 +93,7 @@ const LoginPageForm = () => {
     <>
       <Navbar />
       <main className="grid justify-center items-center h-screen bg-background-poster bg-bottom bg-cover">
-        <div className="w-96 h-fit border-2 bg-green-400 rounded-3xl">
+        <div className="w-96 h-fit rounded-3xl bg-blue-300 drop-shadow-2xl">
           <div className="flex justify-center items-center mb-0">
             <h1 className="font-poppins font-bold mt-4">Log in</h1>
           </div>
@@ -137,33 +137,43 @@ const LoginPageForm = () => {
                 </FormErrorMessage>
               </FormControl>
             </div>
-            <div className="flex flex-col justify-center items-center mb-5 ">
+            <div className="flex flex-col justify-center items-center ">
               <button
                 type="submit"
-                className="bg-blue-500 w-fit p-2 rounded-md text-center"
+                className="bg-blue-500 w-fit p-2 rounded-md text-center text-white"
               >
                 Log in
               </button>
-              <button
-                type="submit"
-                className="w-fit p-2 rounded-md text-center"
-                onClick={togglePassword}
-              >
-                <span className="flex">
-                  show password <EyeIcon className="w-5" />
-                </span>
-              </button>
-              <div className="mt-5">
-                <span>Need an account? </span>
-                <Link
-                  to="/loginpageform"
-                  className="text-blue-800 underline underline-offset-2 hover:text-white transition-all"
-                >
-                  Sign up
-                </Link>
-              </div>
             </div>
           </form>
+          <div className="flex flex-col items-center ">
+            <button
+              type="submit"
+              className="w-fit p-2 rounded-md text-center "
+              onClick={togglePassword}
+            >
+              <span className="flex">
+                show password <EyeIcon className="w-5" />
+              </span>
+            </button>
+            <div className="flex items-center">
+              <span>Need an account? </span>
+              <Link
+                to="/loginpageform"
+                className="text-blue-800 underline underline-offset-2 hover:text-white transition-all"
+              >
+                Sign up
+              </Link>
+            </div>
+            <div className="flex items-center  mb-5">
+              <Link
+                to="/forgotpassword"
+                className="text-blue-800 underline underline-offset-2 hover:text-white transition-all"
+              >
+                Forgot Password?
+              </Link>
+            </div>
+          </div>
         </div>
       </main>
     </>

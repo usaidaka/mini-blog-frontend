@@ -34,7 +34,7 @@ const CategoryPostPage = () => {
     <div>
       <main className="grid grid-cols-6 justify-center gap-2">
         <AsideLeft />
-        <section className="col-span-4 border-2 border-yellow-500 ">
+        <section className="col-span-4 ">
           {cat.map((item) => (
             <>
               <div className="grid grid-cols-4 bg-gray-100 rounded-lg mt-5 w-fit mb-10">

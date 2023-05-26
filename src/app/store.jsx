@@ -11,6 +11,7 @@ import userReducer from "../features/userBlogSlice";
 import getLikeReducer from "../features/getLikeSlice";
 import likePostReducer from "../features/likeSlice";
 import tokenReducer from "../features/getTokenSlice";
+import likeBlogReducer from "../features/likeBlogSlice";
 
 export const store = configureStore({
   reducer: {
@@ -25,5 +26,6 @@ export const store = configureStore({
     likeInfo: getLikeReducer,
     likePost: likePostReducer,
     keepToken: tokenReducer,
+    likeBlog: likeBlogReducer,
   },
 });

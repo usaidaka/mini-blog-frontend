@@ -67,7 +67,6 @@ const SearchBar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDropdownOpen2, setIsDropdownOpen2] = useState(false);
   const [allCategory, setAllCategory] = useState([]);
-  const [isClicked, setIsClicked] = useState(false);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -75,6 +74,11 @@ const SearchBar = () => {
 
   const toggleDropdown2 = () => {
     setIsDropdownOpen2(!isDropdownOpen2);
+  };
+
+  const closeDropdowns = () => {
+    setIsDropdownOpen(false);
+    setIsDropdownOpen2(false);
   };
 
   const ALL_CATEGORY = "/blog/allCategory";
@@ -109,7 +113,7 @@ const SearchBar = () => {
   const formattedDate = date.format("DD MMMM YYYY");
 
   return (
-    <section className="col-span-5 border-2 border-yellow-500 ">
+    <section className="col-span-5">
       <div className="w-[55rem]">
         <div className="w-full grid grid-flow-row content-center">
           <p className="text-4xl font-poppins my-4">
@@ -159,7 +163,7 @@ const SearchBar = () => {
                                 type="button"
                                 onClick={() => {
                                   handleCategory(result.id);
-                                  setIsClicked(!isClicked);
+                                  closeDropdowns();
                                 }}
                                 className={`inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white `}
                               >
@@ -207,7 +211,10 @@ const SearchBar = () => {
                       <li>
                         <button
                           type="button"
-                          onClick={() => handleSort("ASC")}
+                          onClick={() => {
+                            handleSort("ASC");
+                            closeDropdowns();
+                          }}
                           className="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                         >
                           Ascending
@@ -216,7 +223,10 @@ const SearchBar = () => {
                       <li>
                         <button
                           type="button"
-                          onClick={() => handleSort("DESC")}
+                          onClick={() => {
+                            handleSort("DESC");
+                            closeDropdowns();
+                          }}
                           className="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                         >
                           Descending
@@ -240,7 +250,7 @@ const SearchBar = () => {
                   >
                     <svg
                       aria-hidden="true"
-                      className="w-5 h-5"
+                      className="w-5 h-5 text-black"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -265,11 +275,11 @@ const SearchBar = () => {
               {/* ini cardbloglanding */}
               {allBlog.map((result) => (
                 <>
-                  <div className="grid grid-cols-4 bg-gray-100 rounded-lg mt-5 w-fit mb-10">
+                  <div className="grid grid-cols-4 bg-gray-100 rounded-lg mt-5 w-full mb-10">
                     <div className="columns-1 flex justify-center items-center mr-3">
                       <Link to="">
                         <img
-                          src="https://source.unsplash.com/random?orientation=landscape&category=technology&size=200x200"
+                          src={`https://minpro-blog.purwadhikabootcamp.com/${result.imageURL}`}
                           alt=""
                           className="rounded-full w-36"
                         />

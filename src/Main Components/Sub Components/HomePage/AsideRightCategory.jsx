@@ -18,13 +18,13 @@ const AsideRightCategory = () => {
   const newCategory = cat.posts;
 
   return (
-    <div className="border-2 h-fit border-red-400 mt-10">
+    <div className=" h-fit mt-10">
       <h1 className="font-satisfy text-2xl">Category</h1>
       <div className="mt-1">
         {newCategory.map((cat) => (
           <>
             <ul key={cat.id}>
-              <li>
+              <li key={cat.id}>
                 <Link to={`/category/${cat.id}`} key={cat.id}>
                   {cat.name}
                 </Link>

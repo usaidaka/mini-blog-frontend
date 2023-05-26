@@ -20,7 +20,7 @@ const Footer = () => {
         <div className="col-span-2 row-span-1 ">
           <div className="flex flex-col justify-center items-center">
             <h1 className="font-poppins font-bold ">
-              Reach me us on our social media
+              Reach us on our social media
             </h1>
             <p className="font-poppins text-sm">
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad vel

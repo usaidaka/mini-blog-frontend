@@ -9,7 +9,7 @@ export default {
   theme: {
     extend: {
       backgroundImage: {
-        "background-poster": "url('./src/assets/background.jpg')",
+        "background-poster": "url('./src/assets/background.webp')",
       },
       fontFamily: {
         poppins: ["Poppins"],

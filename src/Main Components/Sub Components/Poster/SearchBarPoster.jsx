@@ -5,7 +5,6 @@ import { Folder } from "@mui/icons-material";
 import {
   ChevronRightIcon,
   CalendarDaysIcon,
-  HeartIcon,
 } from "@heroicons/react/24/outline";
 import dayjs from "dayjs";
 
@@ -109,7 +108,7 @@ const SearchBarPoster = () => {
   const formattedDate = date.format("DD MMMM YYYY");
 
   return (
-    <section className="col-span-5 border-2 border-yellow-500 w-full">
+    <section className="col-span-5 mx-10">
       <div className="w-full ">
         <div className="w-full grid grid-flow-row content-center">
           <p className="text-4xl font-poppins my-4">
@@ -236,7 +235,7 @@ const SearchBarPoster = () => {
                   <button
                     type="submit"
                     onClick={buttonFilterBlog}
-                    className="absolute top-0 right-0 p-2.5 text-sm font-medium text-white bg-darkcho rounded-r-lg border border-darkcho hover:bg-olive focus:ring-4 focus:outline-none focus:ring-blue-300 "
+                    className="absolute top-0 right-0 p-2.5 text-sm font-medium text-black bg-darkcho rounded-r-lg border border-darkcho hover:bg-olive focus:ring-4 focus:outline-none focus:ring-blue-300 "
                   >
                     <svg
                       aria-hidden="true"
@@ -269,9 +268,9 @@ const SearchBarPoster = () => {
                     <div className="columns-1 flex justify-center items-center mr-3">
                       <Link to="">
                         <img
-                          src="https://source.unsplash.com/random?orientation=landscape&category=technology&size=200x200"
+                          src={`https://minpro-blog.purwadhikabootcamp.com/${result.imageURL}`}
                           alt=""
-                          className="rounded-full w-36"
+                          className=" w-fit h-48"
                         />
                       </Link>
                     </div>
@@ -289,12 +288,6 @@ const SearchBarPoster = () => {
                             <Folder />
                           </p>
                           <p>{result.Category.name}</p>
-                        </div>
-                        <div className="flex justify-start items-center gap-1">
-                          <p className="w-6">
-                            <HeartIcon />
-                          </p>
-                          <p>Likes 9</p>
                         </div>
                         <div>
                           <p className="font-semibold italic">

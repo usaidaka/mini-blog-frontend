@@ -11,21 +11,21 @@ import { likePost } from "../../../features/likeSlice";
 
 const SinglePostPage = () => {
   const posts = useSelector((state) => state.posts);
-  const liked = useSelector((state) => state.likePost);
+  const liked = useSelector((state) => state.likeBlog);
   const [post, setPost] = useState([]);
   const [like, setLike] = useState(false);
   const { postId } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  console.log(liked.loading);
-
-  const handleLike = (BlogId) => {
-    console.log(BlogId);
-    dispatch(likePost({ BlogId }));
-
+  const handleLike = (postId) => {
+    console.log(postId);
+    dispatch(likePost(postId));
     setLike(true);
   };
+
+  console.log(liked);
+  /*  */
 
   useEffect(() => {
     dispatch(fetchPosts());
@@ -35,14 +35,15 @@ const SinglePostPage = () => {
     axios.get(`/blog/${postId}`).then((res) => {
       if (res.data?.length > 0) {
         setPost(res.data[0]);
-        const likedBlogById = liked?.map((res) => res?.BlogId) || [];
-        setLike(likedBlogById.includes(postId));
+        const likedBlogById = liked.likeBlog?.map((res) => res?.BlogId) || [];
+        setLike(likedBlogById.includes(Number(postId)));
+        console.log(likedBlogById);
       }
     });
   }, [liked, postId]);
 
-  console.log(like);
-  console.log(postId);
+  console.log(liked);
+
   console.log(post);
 
   useEffect(() => {
@@ -52,8 +53,6 @@ const SinglePostPage = () => {
     }
   }, [navigate]);
 
-  console.log(post);
-
   if (posts.loading && liked.loading) {
     return <p className="h-screen">loading</p>;
   }
@@ -62,12 +61,13 @@ const SinglePostPage = () => {
 
   const date = dayjs(newPosts.map((x) => x?.createdAt));
   const formattedDate = date.format("DD MMMM YYYY");
+  // console.log(formattedDate);
 
   return (
     <div className="">
       <main className="grid grid-cols-6 justify-center gap-2">
         <AsideLeft />
-        <section className="col-span-5 border-2 border-yellow-500 ">
+        <section className="col-span-5 ">
           <div className="grid grid-cols-4 bg-gray-100 rounded-lg mt-5 w-fit mb-10">
             <div className="columns-1 flex justify-center items-center mr-3">
               <img
@@ -95,7 +95,6 @@ const SinglePostPage = () => {
                   <p className="w-6">
                     <HeartIcon />
                   </p>
-                  <p>Likes 9</p>
                 </div>
                 <div>
                   <p className="font-semibold italic">
@@ -108,14 +107,14 @@ const SinglePostPage = () => {
               </div>
               <div
                 onClick={(e) => {
-                  handleLike(post.id);
+                  handleLike(postId);
                   e.preventDefault();
                 }}
               >
                 {like ? (
-                  <button className="bg-red-500 cursor-pointer">HAHAHHA</button>
+                  <button className="bg-red-500 cursor-pointer">Liked</button>
                 ) : (
-                  <button className="bg-red-500 cursor-pointer">HEHEHE</button>
+                  <button className="bg-blue-500 cursor-pointer">Like</button>
                 )}
               </div>
             </div>
