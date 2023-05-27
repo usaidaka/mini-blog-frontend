@@ -8,6 +8,7 @@ import AsideLeft from "./Sub Components/HomePage/AsideLeft";
 import { FormControl, FormErrorMessage } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCategory } from "../features/categorySlice";
+import withAuth from "../withAuth";
 
 const CREATE_BLOG = "/blog";
 const CreateBlog = () => {
@@ -118,6 +119,7 @@ const CreateBlog = () => {
                     name="title"
                     className="py-1 px-2 border-2 border-blue-600 rounded-full"
                     autoComplete="off"
+                    autoFocus
                   />
                   <FormErrorMessage className="text-red-500 text-sm font-medium">
                     {formik.errors.title}
@@ -252,4 +254,4 @@ const CreateBlog = () => {
   );
 };
 
-export default CreateBlog;
+export default withAuth(CreateBlog);

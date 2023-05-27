@@ -1,5 +1,6 @@
 import AsideLeft from "./Sub Components/HomePage/AsideLeft";
 import SearchBar from "./SearchBar";
+import withAuth from "../withAuth";
 
 const SearchPage = () => {
   return (
@@ -12,4 +13,4 @@ const SearchPage = () => {
   );
 };
 
-export default SearchPage;
+export default withAuth(SearchPage);

@@ -5,10 +5,10 @@ import AsideLeft from "../HomePage/AsideLeft";
 import {
   CalendarDaysIcon,
   ChevronRightIcon,
-  HeartIcon,
 } from "@heroicons/react/24/outline";
 import { Folder } from "@mui/icons-material";
 import AsideRight from "../HomePage/AsideRight";
+import withAuth from "../../../withAuth";
 
 const CategoryPostPage = () => {
   const { categoryId } = useParams();
@@ -64,12 +64,6 @@ const CategoryPostPage = () => {
                       </p>
                       <p></p>
                     </div>
-                    <div className="flex justify-start items-center gap-1">
-                      <p className="w-6">
-                        <HeartIcon />
-                      </p>
-                      <p>Likes 9</p>
-                    </div>
                     <div>
                       <p className="font-semibold italic" key={cat.id}>
                         By {item.User.username}
@@ -96,4 +90,4 @@ const CategoryPostPage = () => {
   );
 };
 
-export default CategoryPostPage;
+export default withAuth(CategoryPostPage);

@@ -1,9 +1,6 @@
 import { Fragment } from "react";
 import { Popover, Transition } from "@headlessui/react";
-import {
-  Bars3Icon,
-  MagnifyingGlassCircleIcon,
-} from "@heroicons/react/24/outline";
+import { Bars3Icon } from "@heroicons/react/24/outline";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 
 import logoDPR from "../../../assets/DPR.png";
@@ -39,7 +36,7 @@ const Nav = ({ setMobileMenuOpen, products }) => {
             <label htmlFor="search-blog" className="sr-only">
               Search Bar
             </label>
-            <>
+            {/* <>
               <a href="#search-blog">
                 <MagnifyingGlassCircleIcon className="w-8 m-1 text-white " />
               </a>
@@ -50,7 +47,7 @@ const Nav = ({ setMobileMenuOpen, products }) => {
                 className="min-w-0 flex-auto rounded-md border-0 bg-white/75 px-3.5 py-2 text-black shadow-sm ring-1 ring-blue-500 focus:ring-1 focus:ring-outset focus:ring-blue-500 sm:text-sm sm:leading-6 relative"
                 placeholder="Search blog"
               />
-            </>
+            </> */}
           </div>
         </Popover.Group>
         {/* pop up untuk log in */}

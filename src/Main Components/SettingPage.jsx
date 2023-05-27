@@ -1,3 +1,4 @@
+import withAuth from "../withAuth";
 import AsideLeft from "./Sub Components/HomePage/AsideLeft";
 import SettingProfile from "./Sub Components/Setting/SettingProfile";
 
@@ -15,4 +16,4 @@ const SettingPage = () => {
   );
 };
 
-export default SettingPage;
+export default withAuth(SettingPage);

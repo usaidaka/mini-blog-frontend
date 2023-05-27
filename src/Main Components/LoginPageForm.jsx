@@ -115,6 +115,7 @@ const LoginPageForm = () => {
                   name="username"
                   className="py-1 px-2 border-2 border-blue-600 rounded-full"
                   autoComplete="off"
+                  autoFocus
                 />
                 <FormErrorMessage className="text-red-500 text-sm font-medium">
                   {formik.errors.username}

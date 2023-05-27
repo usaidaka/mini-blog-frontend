@@ -7,6 +7,7 @@ import { useState } from "react";
 import { changePass } from "../../../features/changePwdSlice";
 import { FormControl, FormErrorMessage } from "@chakra-ui/react";
 import AsideLeft from "../HomePage/AsideLeft";
+import withAuth from "../../../withAuth";
 
 const pwRgx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[-_+=!@#$%^&*])(?=.{8,})/;
 const SetPassword = () => {
@@ -93,6 +94,7 @@ const SetPassword = () => {
                       name="currentPassword"
                       className="py-1 px-2 border-2 border-blue-600 rounded-full"
                       autoComplete="off"
+                      autoFocus
                     />
                     <FormErrorMessage className="text-red-500 text-sm font-medium">
                       {formik.errors.currentPassword}
@@ -154,4 +156,4 @@ const SetPassword = () => {
   );
 };
 
-export default SetPassword;
+export default withAuth(SetPassword);

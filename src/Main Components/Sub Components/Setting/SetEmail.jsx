@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 
 import AsideLeft from "../HomePage/AsideLeft";
+import withAuth from "../../../withAuth";
 
 const SetEmail = () => {
   const changeEmail = async (values) => {
@@ -90,4 +91,4 @@ const SetEmail = () => {
   );
 };
 
-export default SetEmail;
+export default withAuth(SetEmail);

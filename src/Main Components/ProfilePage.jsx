@@ -1,5 +1,6 @@
 import Articles from "./Sub Components/ProfilePage/Articles";
 import AsideLeft from "./Sub Components/HomePage/AsideLeft";
+import withAuth from "../withAuth";
 
 const ProfilePage = () => {
   return (
@@ -19,4 +20,4 @@ const ProfilePage = () => {
   );
 };
 
-export default ProfilePage;
+export default withAuth(ProfilePage);

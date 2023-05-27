@@ -14,5 +14,6 @@ module.exports = {
     "react/prop-types": "off",
     "react/no-unescaped-entities": "off",
     "no-useless-escape": "off",
+    "react/display-name": "off",
   },
 };

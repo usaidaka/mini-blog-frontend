@@ -1,3 +1,4 @@
+import withAuth from "../withAuth";
 import AsideLeft from "./Sub Components/HomePage/AsideLeft";
 import AsideRight from "./Sub Components/HomePage/AsideRight";
 import SectionMiddle from "./Sub Components/HomePage/SectionMiddle";
@@ -14,4 +15,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default withAuth(HomePage);

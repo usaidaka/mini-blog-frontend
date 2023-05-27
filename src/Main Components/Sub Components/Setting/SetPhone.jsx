@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 
 import AsideLeft from "../HomePage/AsideLeft";
+import withAuth from "../../../withAuth";
 
 const phoneRgx =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -64,6 +65,7 @@ const SetPhone = () => {
                     name="currentPhone"
                     className="py-1 px-2 border-2 border-blue-600 rounded-full"
                     autoComplete="off"
+                    autoFocus
                   />
                   <FormErrorMessage className="text-red-500 text-sm font-medium">
                     {formik.errors.currentPhone}
@@ -105,4 +107,4 @@ const SetPhone = () => {
   );
 };
 
-export default SetPhone;
+export default withAuth(SetPhone);

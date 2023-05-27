@@ -6,6 +6,7 @@ import { FormControl, FormErrorMessage } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { accessAll } from "../../../features/authSlice";
 import AsideLeft from "../HomePage/AsideLeft";
+import withAuth from "../../../withAuth";
 
 const SetUsername = () => {
   const username = useSelector((state) => state.changesUsername);
@@ -72,6 +73,7 @@ const SetUsername = () => {
                       className="py-1 px-2 border-2 border-blue-600 rounded-full"
                       autoComplete="off"
                       placeholder={auth.username}
+                      autoFocus
                     />
                     <FormErrorMessage className="text-red-500 text-sm font-medium">
                       {formik.errors.currentUsername}
@@ -116,4 +118,4 @@ const SetUsername = () => {
   );
 };
 
-export default SetUsername;
+export default withAuth(SetUsername);

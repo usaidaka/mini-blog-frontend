@@ -8,6 +8,7 @@ import { Folder } from "@mui/icons-material";
 import { fetchPosts } from "../../../features/postsSlice";
 import axios from "../../../API/axios";
 import { likePost } from "../../../features/likeSlice";
+import withAuth from "../../../withAuth";
 
 const SinglePostPage = () => {
   const posts = useSelector((state) => state.posts);
@@ -125,4 +126,4 @@ const SinglePostPage = () => {
   );
 };
 
-export default SinglePostPage;
+export default withAuth(SinglePostPage);
