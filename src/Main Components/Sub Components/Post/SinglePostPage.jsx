@@ -69,7 +69,7 @@ const SinglePostPage = () => {
       <main className="grid grid-cols-6 justify-center gap-2">
         <AsideLeft />
         <section className="col-span-5 ">
-          <div className="grid grid-cols-4 bg-gray-100 rounded-lg mt-5 w-fit mb-10">
+          <div className="grid grid-cols-4 bg-gray-100 rounded-lg mt-5 w-full mb-10">
             <div className="columns-1 flex justify-center items-center mr-3">
               <img
                 src="https://source.unsplash.com/random?orientation=landscape&category=technology&size=200x200"

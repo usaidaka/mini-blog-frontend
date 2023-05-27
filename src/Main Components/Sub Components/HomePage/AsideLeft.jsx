@@ -49,6 +49,9 @@ const AsideLeft = () => {
               <Link to="/setting">SETTING</Link>
             </li>
             <li className="w-fit hover:text-gray-200 transition-all">
+              <Link to="/likedpost">LIKED POST</Link>
+            </li>
+            <li className="w-fit hover:text-gray-200 transition-all">
               <button
                 onClick={() => {
                   localStorage.removeItem("token");

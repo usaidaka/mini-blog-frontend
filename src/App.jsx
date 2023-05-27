@@ -16,6 +16,7 @@ import { likeBlog } from "./features/likeBlogSlice";
 import ForgotPasswordPage from "./Main Components/ForgotPasswordPage";
 import logoLoading from "./assets/cool-loading-animated-gif-4.gif";
 import EmailVerification from "./Main Components/EmailVerification";
+import LikedPost from "./Main Components/LikedPost";
 
 const Poster = lazy(() => import("./Main Components/Poster"));
 const SinglePostPage = lazy(() =>
@@ -63,6 +64,7 @@ function App() {
           <Route path="/setting/phone" element={<SetPhone />} />
           <Route path="/setting/password" element={<SetPassword />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/likedpost" element={<LikedPost />} />
           <Route path="verification/:token" element={<EmailVerification />} />
           <Route path="/searchpage" element={<SearchPage />} />
           <Route path="/" element={<Poster />}>

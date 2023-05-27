@@ -37,7 +37,7 @@ const CategoryPostPage = () => {
         <section className="col-span-4 ">
           {cat.map((item) => (
             <>
-              <div className="grid grid-cols-4 bg-gray-100 rounded-lg mt-5 w-fit mb-10">
+              <div className="grid grid-cols-4 bg-gray-100 rounded-lg mt-5 w-full mb-10">
                 <div className="columns-1 flex justify-center items-center mr-3">
                   <Link to="">
                     <img

@@ -14,7 +14,7 @@ const SectionMiddle = () => {
   }, [dispatch]);
 
   if (posts.loading) {
-    return <p className="h-screen">loading</p>;
+    return null;
   }
 
   const newPosts = posts.posts.result;

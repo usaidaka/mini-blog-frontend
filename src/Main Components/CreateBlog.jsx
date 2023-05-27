@@ -75,7 +75,7 @@ const CreateBlog = () => {
   });
 
   if (category.loading) {
-    return <p>loading</p>;
+    return <p className="h-screen">loading</p>;
   }
 
   const allCategory = category.posts;
