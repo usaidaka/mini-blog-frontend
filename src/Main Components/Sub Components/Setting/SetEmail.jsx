@@ -75,14 +75,6 @@ const SetEmail = () => {
                   </FormErrorMessage>
                 </FormControl>
               </div>
-              <div className="columns-1  flex justify-center items-center">
-                <input
-                  type="image"
-                  src="https://source.unsplash.com/random?orientation=landscape&category=nature&size=200x200"
-                  alt=""
-                  className="rounded-full"
-                />
-              </div>
             </div>
           </section>
           <aside className="columns-1 "></aside>

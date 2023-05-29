@@ -99,19 +99,8 @@ const SetUsername = () => {
                   <button type="submit">change name</button>
                 </form>
               </div>
-              <div className="columns-1  flex justify-center items-center">
-                <input
-                  type="image"
-                  src="https://source.unsplash.com/random?orientation=landscape&category=nature&size=200x200"
-                  alt=""
-                  className="rounded-full"
-                />
-              </div>
             </div>
           </section>
-          <aside className="columns-1 ">
-            <h1>ASIDE RIGHT</h1>
-          </aside>
         </main>
       </div>
     </>

@@ -137,19 +137,8 @@ const SetPassword = () => {
                   <button type="submit">Submit password</button>
                 </form>
               </div>
-              <div className="columns-1 border-2 border-green-500 flex justify-center items-center">
-                <input
-                  type="image"
-                  src="https://source.unsplash.com/random?orientation=landscape&category=nature&size=200x200"
-                  alt=""
-                  className="rounded-full"
-                />
-              </div>
             </div>
           </section>
-          <aside className="columns-1 border-2 border-green-500">
-            <h1>ASIDE RIGHT</h1>
-          </aside>
         </main>
       </div>
     </>

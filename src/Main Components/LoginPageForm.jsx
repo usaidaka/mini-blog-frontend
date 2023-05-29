@@ -160,7 +160,7 @@ const LoginPageForm = () => {
             <div className="flex items-center">
               <span>Need an account? </span>
               <Link
-                to="/loginpageform"
+                to="/signuppageform"
                 className="text-blue-800 underline underline-offset-2 hover:text-white transition-all"
               >
                 Sign up

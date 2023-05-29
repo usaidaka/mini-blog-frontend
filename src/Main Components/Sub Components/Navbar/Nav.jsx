@@ -3,7 +3,7 @@ import { Popover, Transition } from "@headlessui/react";
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 
-import logoDPR from "../../../assets/DPR.png";
+import logo from "../../../assets/bird_2-removebg-preview.png";
 import { Link } from "react-router-dom";
 
 const Nav = ({ setMobileMenuOpen, products }) => {
@@ -16,7 +16,7 @@ const Nav = ({ setMobileMenuOpen, products }) => {
         {/* logo website */}
         <div className="flex lg:flex-1">
           <Link to="/" className="-m-1.5 p-1.5">
-            <img className="h-10 w-auto" src={logoDPR} alt="" />
+            <img className="h-10 w-auto" src={logo} alt="" />
           </Link>
         </div>
         {/* logo burger saat di mobile */}

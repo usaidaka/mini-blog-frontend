@@ -2,6 +2,7 @@ import Navbar from "./Navbar";
 import PosterLeft from "./Sub Components/Poster/PosterLeft";
 import PosterRightBottom from "./Sub Components/Poster/PosterRightBottom";
 import SearchBarPoster from "./Sub Components/Poster/SearchBarPoster";
+import SectionMiddlePoster from "./Sub Components/Poster/SectionMiddlePoster";
 
 const scrollLeft = () => {
   document.getElementById("card").scrollLeft -= 400;
@@ -33,6 +34,8 @@ const Poster = () => {
           </div>
         </div>
       </div>
+
+      <SectionMiddlePoster />
       <SearchBarPoster />
     </>
   );

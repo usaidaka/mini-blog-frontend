@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 import Navbar from "./Main Components/Navbar";
-import loginPlease from "./assets/34338d26023e5515f6cc8969aa027bca_w200.gif";
+import loginPlease from "./assets/login.gif";
 
 function withAuth(Component) {
   return (props) => {

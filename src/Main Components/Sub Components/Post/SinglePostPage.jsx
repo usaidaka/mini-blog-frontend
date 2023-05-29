@@ -72,7 +72,7 @@ const SinglePostPage = () => {
           <div className="grid grid-cols-4 bg-gray-100 rounded-lg mt-5 w-full mb-10">
             <div className="columns-1 flex justify-center items-center mr-3">
               <img
-                src="https://source.unsplash.com/random?orientation=landscape&category=technology&size=200x200"
+                src={`https://minpro-blog.purwadhikabootcamp.com/${post.imageURL}`}
                 alt=""
                 className="rounded-full w-36"
               />
